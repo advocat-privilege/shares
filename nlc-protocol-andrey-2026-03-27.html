@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Протокол — Александр & Андрий · 27.03.2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  :root {
+    --bg: #0a0a0a; --surface: #111; --border: #1e1e1e;
+    --text: #e0e0e0; --muted: #555; --accent: #3b82f6;
+    --green: #22c55e; --yellow: #f59e0b;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; line-height:1.65; }
+  .wrap { max-width:720px; margin:0 auto; padding:48px 24px 96px; }
+
+  /* Header */
+  .header { margin-bottom:40px; }
+  .tag { display:inline-block; background:#1a2233; color:#60a5fa; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; padding:3px 10px; border-radius:4px; margin-bottom:14px; }
+  h1 { font-size:clamp(18px,4vw,24px); font-weight:600; color:#fff; margin-bottom:12px; }
+  .meta-row { display:flex; flex-wrap:wrap; gap:16px; font-size:12px; color:var(--muted); }
+  .meta-row span { display:flex; align-items:center; gap:5px; }
+
+  /* Section */
+  .section { margin-bottom:36px; }
+  .section-head { font-size:10px; font-weight:600; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+
+  /* Participants */
+  .participants { display:flex; gap:10px; flex-wrap:wrap; }
+  .p-chip { display:flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:8px 12px; }
+  .av { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; flex-shrink:0; }
+  .av-a { background:#1d3a6e; color:#60a5fa; }
+  .av-b { background:#064e3b; color:#34d399; }
+  .p-info .name { font-size:13px; font-weight:500; color:#ddd; }
+  .p-info .role { font-size:11px; color:var(--muted); }
+
+  /* Agenda */
+  .agenda-list { list-style:none; }
+  .agenda-list li { font-size:13px; color:#aaa; padding:5px 0; display:flex; gap:10px; }
+  .agenda-list li::before { content:counter(item); counter-increment:item; display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; background:#1a1a1a; border:1px solid #2a2a2a; border-radius:4px; font-size:10px; color:#555; flex-shrink:0; margin-top:1px; }
+  .agenda-list { counter-reset:item; }
+
+  /* Decisions */
+  .decision-block { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:10px; }
+  .decision-topic { font-size:11px; color:var(--accent); font-weight:600; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
+  .decision-text { font-size:13px; color:#ccc; }
+
+  /* Tasks table */
+  .tasks { width:100%; border-collapse:collapse; font-size:13px; }
+  .tasks th { text-align:left; font-size:10px; font-weight:600; color:var(--muted); letter-spacing:1px; text-transform:uppercase; padding:8px 12px; border-bottom:1px solid var(--border); }
+  .tasks td { padding:10px 12px; border-bottom:1px solid #151515; color:#bbb; vertical-align:top; }
+  .tasks tr:last-child td { border-bottom:none; }
+  .check { width:18px; height:18px; border:1.5px solid #2a2a2a; border-radius:4px; display:inline-block; }
+  .owner-badge { display:inline-block; background:#1a2233; color:#60a5fa; border-radius:4px; padding:2px 7px; font-size:11px; }
+  .deadline { color:var(--yellow); font-size:12px; }
+
+  /* Open questions */
+  .q-list { list-style:none; }
+  .q-list li { font-size:13px; color:#888; padding:6px 0; border-bottom:1px solid #151515; display:flex; gap:10px; align-items:flex-start; }
+  .q-list li:last-child { border-bottom:none; }
+  .q-list li::before { content:'?'; color:#555; font-weight:700; width:16px; flex-shrink:0; }
+
+  /* Footer */
+  .footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+  .fathom-btn { display:inline-flex; align-items:center; gap:6px; background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:7px 12px; font-size:12px; color:#666; text-decoration:none; }
+  .fathom-btn:hover { color:#999; }
+  .gen { font-size:11px; color:#2a2a2a; }
+
+  @media(max-width:600px){
+    .tasks { display:block; overflow-x:auto; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="tag">NLC · Протокол встречи</div>
+    <h1>AI-платформа: офис, агенты, Telegram-интеграция</h1>
+    <div class="meta-row">
+      <span>📅 27 марта 2026</span>
+      <span>🕙 23:16 – 00:01 (Киев)</span>
+      <span>⏱ ~45 мин</span>
+      <span>🎥 Zoom · Online</span>
+    </div>
+  </div>
+
+  <!-- Participants -->
+  <div class="section">
+    <div class="section-head">Участники</div>
+    <div class="participants">
+      <div class="p-chip">
+        <div class="av av-a">АЮ</div>
+        <div class="p-info">
+          <div class="name">Александр (АЮ)</div>
+          <div class="role">Владелец · Привилегия / NLC</div>
+        </div>
+      </div>
+      <div class="p-chip">
+        <div class="av av-b">АН</div>
+        <div class="p-info">
+          <div class="name">Андрий</div>
+          <div class="role">Разработчик · AI-платформа</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Agenda -->
+  <div class="section">
+    <div class="section-head">Повестка</div>
+    <ol class="agenda-list">
+      <li>AI-офис: структура, база знаний, иерархия инструкций</li>
+      <li>Типы AI-агентов: функции, консультанты, роли</li>
+      <li>Интеграция Telegram с AI-платформой</li>
+      <li>Автоматизация воркфлоу: протоколы, файлы, деплой</li>
+      <li>Дорожная карта и сотрудничество</li>
+    </ol>
+  </div>
+
+  <!-- Decisions -->
+  <div class="section">
+    <div class="section-head">Обсуждение и решения</div>
+
+    <div class="decision-block">
+      <div class="decision-topic">AI-офис и база знаний</div>
+      <div class="decision-text">Утверждена структура AI-офиса: новостная лента → AI-ассистент → база знаний. Каждая инструкция имеет иерархию: краткое описание → шаги → чек-лист. База обновляется непрерывно.</div>
+    </div>
+
+    <div class="decision-block">
+      <div class="decision-topic">Типы AI-агентов</div>
+      <div class="decision-text">Зафиксирована классификация: <strong>Агент-функция</strong> (конкретные задачи, напр. Zoom-встреча), <strong>AI-консультант</strong> (поглощает знания, best practices), <strong>AI-роль</strong> (PM, маркетолог), <strong>Комплексный агент</strong> (комбинирует несколько возможностей).</div>
+    </div>
+
+    <div class="decision-block">
+      <div class="decision-topic">Telegram-интеграция</div>
+      <div class="decision-text">Принято решение: бот реагирует по-разному в групповых чатах и личных сообщениях, распознаёт и тегает участников, автоматически создаёт папки и Markdown-файлы под каждый разговор.</div>
+    </div>
+
+    <div class="decision-block">
+      <div class="decision-topic">Автоматизация</div>
+      <div class="decision-text">Подтверждены рабочие сценарии: генерация протоколов после встреч, поиск файлов по запросу, деплой протокола как веб-страницы. Зафиксирован значительный прирост продуктивности.</div>
+    </div>
+
+    <div class="decision-block">
+      <div class="decision-topic">Сотрудничество</div>
+      <div class="decision-text">Обсуждён возможный переход Андрия на full-time роль. Договорились продолжать совместную работу и развивать платформу в течение ближайших недель.</div>
+    </div>
+  </div>
+
+  <!-- Tasks -->
+  <div class="section">
+    <div class="section-head">Задачи</div>
+    <table class="tasks">
+      <thead>
+        <tr>
+          <th style="width:24px">#</th>
+          <th>Задача</th>
+          <th>Ответственный</th>
+          <th>Срок</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="check"></div></td>
+          <td>Изучить настройку CloudBot на VPS — подготовить инструкцию</td>
+          <td><span class="owner-badge">Андрий</span></td>
+          <td><span class="deadline">до 31.03.2026</span></td>
+        </tr>
+        <tr>
+          <td><div class="check"></div></td>
+          <td>Поделиться MindMap и деревом агентов для координации разработки</td>
+          <td><span class="owner-badge">Андрий</span></td>
+          <td><span class="deadline">до 29.03.2026</span></td>
+        </tr>
+        <tr>
+          <td><div class="check"></div></td>
+          <td>Развить AI-маркетинг: возможности работы с соцсетями</td>
+          <td><span class="owner-badge">АЮ + Андрий</span></td>
+          <td><span class="deadline">до 07.04.2026</span></td>
+        </tr>
+        <tr>
+          <td><div class="check"></div></td>
+          <td>Обсудить условия перехода Андрия на full-time роль</td>
+          <td><span class="owner-badge">АЮ</span></td>
+          <td><span class="deadline">следующая встреча</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Open questions -->
+  <div class="section">
+    <div class="section-head">Открытые вопросы</div>
+    <ul class="q-list">
+      <li>Формат и условия full-time сотрудничества с Андрием → АЮ</li>
+      <li>Приоритизация: AI-маркетинг vs AI-офис в апреле → АЮ + Андрий</li>
+    </ul>
+  </div>
+
+  <!-- Next meeting -->
+  <div class="section">
+    <div class="section-head">Следующая встреча</div>
+    <div style="font-size:13px;color:#888;">По договорённости · Повестка: дерево агентов, CloudBot VPS, AI-маркетинг</div>
+  </div>
+
+  <div class="footer">
+    <a class="fathom-btn" href="https://fathom.video/share/NZsB-4uSUfwHJiDi3QpPYMWxRECs8-sT" target="_blank">
+      ▶ Запись в Fathom
+    </a>
+    <div class="gen">Ai Протоколист NLC · 28.03.2026</div>
+  </div>
+
+</div>
+</body>
+</html>
